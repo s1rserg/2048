@@ -9,6 +9,7 @@
         for (let i = 0; i < width**2; i++) {
             square = document.createElement('div')
             square.innerHTML = 0
+            square.className = 'square'
             gridDisplay.appendChild(square)
             squares.push(square)
             
@@ -76,5 +77,41 @@
         }
     }
 
+    function combineRow() {
+        for (let i = 0; i < 15; i++) {
+            if(squares[i].innerHTML === squares[i+1].innerHTML) {
+                let combinedTotal = +squares[i].innerHTML + +squares[i+1].innerHTML
+                squares[i].innerHTML = combinedTotal
+                squares[i+1].innerHTML = 0
+            }
+        }
+    }
+
+
+  //assign keycodes
+  
+  function control(e) {
+      if(e.keyCode === 39) {
+        keyRight()
+      } else if (e.keyCode === 37) {
+          keyLeft()
+      }
+  }
+
+  document.addEventListener('keyup', control)
+
+  function keyRight() {
+      swipeRight()
+      combineRow()
+      swipeRight()
+      generate()
+  }
+
+  function keyLeft() {
+    swipeLeft()
+    combineRow()
+    swipeLeft()
+    generate()
+}
 
  })
